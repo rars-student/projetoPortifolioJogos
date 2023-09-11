@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Meus Projetos</title>
+  <link rel="stylesheet" href="./src/css/style.css" />
+</head>
+
+<body>
+  <nav>
+    <ul>
+      <li><a href="./meusProjetos.html">Meus Projetos</a></li>
+    </ul>
+  </nav>
+
+  <header>
+    <h1>Meus Projetos</h1>
+  </header>
+
+  <main>
+    <form ,3,3
+    EEEE,eEER
+    3
+    ,rf  projectForm" action="/projetos" method="POST">
+      <h2>Cadastre Seu Projeto</h2>
+      <label for="id">ID:</label>
+      <input type="text" id="id" name="id" required>
+
+      <label for="imagem">Imagem:</label>
+      <input type="text" id="imagem" name="imagem" required>
+
+      <label for="nome">Nome:</label>
+      <input type="text" id="nome" name="nome" required>
+
+      <label for="descricao">Descrição:</label>
+      <textarea id="descricao" name="descricao" required></textarea>
+
+      <label for="link">Link:</label>
+      <input type="text" id="link" name="link" required>
+
+      <button type="submit">Criar Projeto</button>
+    </form>
+
+    <table id="tabela-projetos">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Imagem Do Projeto</th>
+          <th>Nome</th>
+          <th>Descrição</th>
+          <th>Link</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </main>
+
+  <footer>
+    &COPY; Todos os direitos reservados | Raphael Rodrigues 2023
+  </footer>
+
+  <!-- <script src="./src/js/script.js"></script> -->
+  <script>
+    // Função para abrir o WhatsApp
+    const abrirWhatsapp = () => {
+      let number = "5521982612819"; // substitua pelo número no formato internacional (ativo no WhatsApp)
+      let msg = document.getElementById("msg").value; // obtém o texto do campo de mensagem
+
+      // montar o link (número e texto) (web)
+      let target = `https://api.whatsapp.com/send?phone=${encodeURIComponent(
+        number
+      )}&text=${encodeURIComponent(msg)}`;
+
+      // abre o link no WhatsApp (web)
+      window.open(target);
+    };
+
+    // Carregar projetos via Fetch
+    const tabelaProjetos = document
+      .getElementById("tabela-projetos")
+      .getElementsByTagName("tbody")[0];
+
+    fetch("http://localhost:3000/projetos") // Deve corresponder à sua rota
+      .then(response => response.json())
+      .then(projetos => {
+        if (Array.isArray(projetos)) {
+          projetos.forEach(projeto => {
+            if (projeto && projeto.id) { // Verifica se o projeto não é nulo e tem uma propriedade 'id'
+              const linha = document.createElement("tr");
+              linha.innerHTML = `
+              <td>${projeto.id}</td>
+              <td><img src="${projeto.imagem}"></td>
+              <td>${projeto.nome}</td>
+              <td>${projeto.descricao}</td>
+              <td><a href="${projeto.link}" target="_blank">${projeto.link}</a></td>
+          `;
+              tabelaProjetos.appendChild(linha);
+            }
+          });
+        } else {
+          console.error("A resposta do servidor não é um array de projetos:", projetos);
+        }
+      })
+      .catch(error => {
+        console.error("Erro ao buscar projetos:", error);
+      });
+
+    document.getElementById("projectForm").addEventListener("submit", function (e) {
+      e.preventDefault(); // Impede o envio padrão do formulário
+
+      const form = e.target;
+      const formData = new FormData(form);
+
+      // Enviar os dados para o servidor usando Fetch
+      fetch("http://localhost:3000/projetos", {
+        method: "POST",
+        body: formData,
+      })
+        .then((response) => response.json())
+        .then((novoProjeto) => {
+          // Adicionar o novo projeto à tabela
+          const tabelaProjetos = document.getElementById("tabela-projetos").getElementsByTagName("tbody")[0];
+          const linha = document.createElement("tr");
+          linha.innerHTML = `
+        <td>${novoProjeto.id}</td>
+        <td><img src="${novoProjeto.imagem}"></td>
+        <td>${novoProjeto.nome}</td>
+        <td>${novoProjeto.descricao}</td>
+        <td><a href="${novoProjeto.link}" target="_blank">${novoProjeto.link}</a></td>
+      `;
+          tabelaProjetos.appendChild(linha);
+
+          // Limpar os campos do formulário
+          form.reset();
+        })
+        .catch((error) => {
+          console.error("Erro ao criar projeto:", error);
+        });
+    });
+
+  </script>
+</body>
+
+</html>

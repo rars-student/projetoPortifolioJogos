@@ -1,0 +1,147 @@
+@import url("https://fonts.googleapis.com/css2?family=Tektur:wght@400;500;600;700;800;900&display=swap");
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Tektur", cursive;
+}
+
+body {
+  height: 100vh;
+  background: url("../../assets/img/img01.jpg") no-repeat center #d1d1d1;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+header {
+  padding: 20px 0;
+  width: 100vw;
+  text-align: center;
+  background-color: #282828;
+  color: #fff;
+}
+
+header h1 {
+  font-size: 25px;
+}
+
+main {
+  width: 95vw;
+  height: 100vh;
+  padding: 50px;
+  background-color: rgba(255, 255, 255, 0.8);
+  /* border-radius: 5px; */
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ⬇️⬇️⬇️ Estilos da tabela ⬇️⬇️⬇️ */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 16px;
+  font-family: Arial, sans-serif;
+}
+
+th, td {
+  border: 1px solid #232323;
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+/* Estilo para destacar linhas */
+tr:hover {
+  background-color: #f5f5f5;
+}
+/* ⬆️⬆️⬆️ Estilos da tabela ⬆️⬆️⬆️ */
+
+section.sobre {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+section.contato {
+  width: 100%;
+  padding: 20px;
+  background-color: #282828;
+  color: #FFF;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+}
+
+section.contato h2 {
+  text-align: center;
+}
+
+main img {
+  width: 30%;
+  height: auto;
+  border-radius: 10px;
+  margin-bottom: 30px;
+}
+
+main p {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 600;
+  line-height: 27px;
+  text-align: justify;
+}
+
+div.cards {
+  padding: 20px 50px;
+  margin: 30px 0;
+  background-color: #fff;
+  border-radius: 10px;
+  display: flex;
+  gap: 50px;
+}
+
+div.cards img {
+  width: 100%;
+  height: auto;
+}
+
+div.cards button.btn-card {
+  width: 100%;
+  padding: 15px;
+  background-color: #9700d3;
+	font-weight: 700;
+	font-size: 1.3em;
+	color: #fff;
+	border: none;
+	cursor: pointer;
+}
+
+form#projectForm {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* form#projectForm input, form#projectForm label {
+  width: 50%;
+} */
+
+footer {
+  width: 100vw;
+  background-color: #6a00ff;
+  padding: 10px 30px;
+  color: #fff;
+  text-align: center;
+}
